@@ -1,0 +1,86 @@
+.navbar{
+    .navbar-brand{
+        margin-left: 20px;
+
+        img{
+            height: 35px;
+            width: 35px;
+            margin-right: 10px;
+        }
+    }
+
+    .container-fluid{
+
+        .navbar-collapse{
+
+            .d-flex{
+                
+                .searchInput{
+                    width: 300px;
+                    height: 40px;
+                    border-radius: 10px;
+                    border: 3px solid purple;
+                }
+                .btn-outline-success{
+
+                    img{
+                        height: 24px;
+                        width: 24px;
+                        
+                    }
+                }
+            }
+
+        }
+    }
+}
+
+.nav{
+
+    .nav-link{
+
+        color: black;
+        
+    }
+
+}
+.dropdown-menu {
+    display: none;
+    position: absolute;
+    top: 100%; /* Logo abaixo do item de navegação */
+    left: 0;
+    width: 900px; /* Tamanho total do menu */
+    background-color: #f8f9fa;
+    padding: 20px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+    border: none;
+  }
+
+  /* Mostrar o menu ao passar o mouse sobre o item */
+  .nav-item:hover{
+
+    .nav-link{
+        color: purple;
+        border-bottom: 3px solid purple;
+    }
+    .dropdown-menu {
+        display: block;
+        color: purple;
+        .dropdown-item:hover{
+            
+            font-size: 20px;
+            color: purple;
+        }
+    }
+  }
+    
+
+  /* Estilo para garantir que o conteúdo esteja organizado */
+  .dropdown-menu .row {
+    display: flex;
+    justify-content: space-between;
+  }
+  .nav-item {
+    flex: 1; /* Faz as nav-items ocuparem espaço igual */
+    text-align: center; /* Centraliza o texto */
+  }

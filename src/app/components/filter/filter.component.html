@@ -1,0 +1,44 @@
+<form class="filter-container">
+
+    <span class="spanFilter">Prices</span>
+    <select class="select" name="price" [(ngModel)]="filter.price">
+      <option [ngValue]="null">All Prices</option>
+      <option [ngValue]="{min: 0, max: 50}">$0 - $50</option>
+  <option [ngValue]="{min: 50, max: 100}">$50 - $100</option>
+  <option [ngValue]="{min: 100, max: 200}">$100 - $200</option>
+  <option [ngValue]="{min: 200, max: 500}">$200 - $500</option>
+  <option [ngValue]="{min: 500, max: 99999}">Above $500</option>
+    </select>
+  
+    <span class="spanFilter">Language</span>
+    <div class="Language">
+      <label><input type="checkbox" value="English" name="languageEnglish" (change)="onLanguageChange($event)"> English</label><br>
+      <label><input type="checkbox" value="Portuguese" name="languagePortuguese" (change)="onLanguageChange($event)"> Portuguese</label>
+    </div>
+
+    <span class="spanFilter">Book Cover</span>
+    <div class="bookCover">
+      <label><input type="checkbox" value="SoftCover" name="softCover" (change)="onBookCoverChange($event)"> Soft Cover</label><br>
+      <label><input type="checkbox" value="HardCover" name="hardCover" (change)="onBookCoverChange($event)"> Hard Cover</label>
+    </div>
+    <span class="spanFilter">Categories</span>
+    <div class="Categories">
+      <label><input type="checkbox" value="Biographies & Memoirs" name="Biographies & Memoirs" (change)="onCategoryChange($event)"> Biographies & Memoirs</label><br>
+      <label><input type="checkbox" value="Children\'s Books" name="Children\'s Books" (change)="onCategoryChange($event)"> Children's Books</label><br>
+      <label><input type="checkbox" value="Computers & Technology" name="Computers & Technology" (change)="onCategoryChange($event)"> Computers & Technology</label><br>
+      <label><input type="checkbox" value="Cookbooks, Food" name="Cookbooks, Food" (change)="onCategoryChange($event)"> Cookbooks, Food</label><br>
+      <label><input type="checkbox" value="Education & Teaching" name="Education & Teaching" (change)="onCategoryChange($event)"> Education & Teaching</label><br>
+      <label><input type="checkbox" value="Health & Fitness" name="Health & Fitness" (change)="onCategoryChange($event)"> Health, Fitness & Dieting</label><br>
+      <label><input type="checkbox" value="History" name="History" (change)="onCategoryChange($event)"> History</label><br>
+      <label><input type="checkbox" value="Humor & Entertainment" name="Humor & Entertainment" (change)="onCategoryChange($event)"> Humor & Entertainment</label><br>
+      <label><input type="checkbox" value="Literature & Fiction" name="Literature & Fiction" (change)="onCategoryChange($event)"> Literature & Fiction</label><br>
+      <label><input type="checkbox" value="Mangas" name="Mangas" (change)="onCategoryChange($event)"> Mangas</label><br>
+      <label><input type="checkbox" value="Mystery, Thriller & Suspense" name="Mystery, Thriller & Suspense" (change)="onCategoryChange($event)"> Mystery, Thriller & Suspense</label><br>
+      <label><input type="checkbox" value="Romance" name="Romance" (change)="onCategoryChange($event)"> Romance</label><br>
+      <label><input type="checkbox" value="Science Fiction & Fantasy" name="Science Fiction & Fantasy" (change)="onCategoryChange($event)"> Science Fiction & Fantasy</label><br>
+      <label><input type="checkbox" value="Self-Help" name="Self-Help" (change)="onCategoryChange($event)"> Self-Help</label><br>
+      <label><input type="checkbox" value="Teen & Young Adult" name="Teen & Young Adult" (change)="onCategoryChange($event)"> Teen & Young Adult</label>
+    </div>
+    <button class="apply" (click)="applyFilters()">APPLY</button>
+    <button class="clear" (click)="clearFilters()">CLEAR</button>
+  </form>

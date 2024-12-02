@@ -1,0 +1,32 @@
+<app-header></app-header>
+<div class="container-fluid d-flex justify-content-center align-items-center">
+    <div class="container row ">
+        <div class="img-container col d-flex justify-content-center align-items-center">
+            <img class="img-thumbnail" [src]="'data:image/jpeg;base64,' + book.image" alt="">
+            <span class="description"><b>Description: </b>{{book.description}}</span>
+        </div>
+
+        <div class="pay col">
+            <div class="information">
+                <span class="text-start title">{{book.title}}</span>
+                <span class="text-start car">Information</span>
+                <span class="text-start"><b>Author: </b>{{book.author}}</span>
+                <span class="text-start"><b>Year: </b>{{book.year}}</span>
+                <span class="text-start"><b>Number of Pages: </b>{{book.pages}}</span>
+                <span class="text-start"><b>Language: </b>{{book.language}}</span>
+                <span class="text-start"><b>Book Cover: </b>{{book.bookCover}}</span>
+                <span class="text-start"><b>In Stock: </b>{{book.quantity}}</span>
+                <span class="text-start"><b>Categories: </b>
+                    <span *ngFor="let category of book.categories; let i = index">
+                      {{ category }}<span *ngIf="i < book.categories.length - 1">, </span>
+                    </span>
+                  </span>
+            </div>
+            <div class="payment">
+                <span class="text-start price">${{book.price}}</span>
+                <button class="button buy">Buy</button>
+                <button class="button cart"><i class="fa-solid fa-cart-shopping"></i></button>
+            </div>
+        </div>
+    </div>
+</div>

@@ -1,0 +1,66 @@
+.filter-container {
+    width: 240px;
+    float: left;
+    height: 100%;
+    padding: 20px;
+    box-shadow: 0px 2px 8px rgba(0, 0, 0, 0.1);
+    
+    .spanFilter{
+        display: flex;
+        font-size: 30px;
+        font-weight: bold;
+        margin-bottom: 10px;
+
+    }
+    .select {
+        width: 100%;       
+        font-size: 16px;   
+        border: 1px solid #ccc; 
+        border-radius: 4px;   
+        background-color: #f9f9f9; 
+        color: purple;        
+        cursor: pointer;
+        margin-bottom: 15px;
+    }
+    label{
+        margin-bottom: 10px;
+        font-size: 20px;
+        color: purple;
+    }
+
+    .Language{
+        
+        margin-bottom: 20px;
+    }
+
+    button{
+        display: flex;
+    }
+
+    .apply{
+        margin-top: 10px;
+        width: 200px;
+        height: 50px;
+        justify-content: center;
+        align-items: center;
+        border-radius: 10px;
+        border: 3px solid rgb(69, 2, 69);
+        background-color: purple;
+        color: white;
+    }
+    .apply:hover{
+        background-color: #bf15bf;
+    }
+
+    .clear{
+        margin-top: 20px;
+        width: 200px;
+        height: 50px;
+        justify-content: center;
+        align-items: center;
+        border-radius: 10px;
+        border: 3px solid rgb(77, 2, 19);
+        background-color: rgb(66, 5, 32);
+        color: white;
+    }
+  }
