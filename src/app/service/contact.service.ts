@@ -8,7 +8,8 @@ import { Observable } from 'rxjs';
 })
 export class ContactService {
 
-  private url:string = "http://localhost:8080";
+  // private url:string = "http://localhost:8080";
+  private url:string = "https://livrariaback-end-production.up.railway.app";
   constructor(private http:HttpClient) { }
 
   addNewContact(contactData : Contact): Observable<Contact>{

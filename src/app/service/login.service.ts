@@ -8,7 +8,8 @@ import { tap } from 'rxjs';
 })
 export class LoginService {
   
-  private apiUrl: string = "http://localhost:8080"
+  // private apiUrl: string = "http://localhost:8080"
+  private apiUrl: string = "https://livrariaback-end-production.up.railway.app"
 
   constructor(private httpClient: HttpClient) { }
 
