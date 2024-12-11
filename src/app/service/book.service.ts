@@ -1,7 +1,8 @@
 import { Injectable } from '@angular/core';
-import { HttpClient, HttpParams } from '@angular/common/http';
-import { catchError, Observable, ObservedValueOf, throwError } from 'rxjs';
+import { HttpClient } from '@angular/common/http';
+import { Observable } from 'rxjs';
 import { Book } from '../Model/Book';
+import { environment } from '../../environment';
 
 @Injectable({
   providedIn: 'root'
@@ -10,7 +11,8 @@ export class BookService {
 
 
   // private url:string = "http://localhost:8080";
-  private url:string = "https://livrariaback-end-production.up.railway.app";
+  // private url:string = "https://livrariaback-end-production.up.railway.app";
+  readonly url = environment.url;
   constructor(private http:HttpClient) { }
 
   select():Observable<Book[]>{

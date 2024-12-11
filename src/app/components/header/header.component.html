@@ -18,16 +18,10 @@
         <span class="navbar-toggler-icon"></span>
       </button>
       <div class="collapse navbar-collapse" id="navbarSupportedContent">
-        <form class="d-flex w-100 justify-content-center" (submit)="onSearch($event)">
-          <input 
-            type="text" 
-            placeholder="Search books..." 
-            [(ngModel)]="searchTerm"
-            name="search"
-            [ngModelOptions]="{standalone: true}"
-            (input)="onSearch()" 
-            class="searchInput"/>
-        </form>
+          <div class="d-flex w-100 justify-content-center">
+            <span>Today a reader, tomorrow a leader</span>
+          </div>
+        
         <ul class="navbar-nav me-auto mb-2 mb-lg-0">
           <li class="nav-item">
             <a class="nav-link active" aria-current="page" href="#"

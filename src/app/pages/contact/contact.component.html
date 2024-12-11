@@ -10,6 +10,7 @@
             <form class="message">
                 <input type="text" placeholder="E-mail:" class="form-control" name="Email" [(ngModel)]="contact.email">
                 <input type="text" placeholder="Full Name:" class="form-control" name="Name" [(ngModel)]="contact.name">
+                <input type="text" placeholder="Phone Number:" class="form-control" name="Phone" [(ngModel)]="contact.phone" (input)="formatPhone()">
                 <input type="text" placeholder="Message:" class="form-control" name="Message" [(ngModel)]="contact.message">
                 <button class="contact-us" value="Register" (click)="register()">Contact Us</button>
             </form>

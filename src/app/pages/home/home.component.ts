@@ -11,5 +11,5 @@ import { HeaderComponent } from "../../components/header/header.component";
   styleUrl: './home.component.scss'
 })
 export class HomeComponent {
-
+  
 }
