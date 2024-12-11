@@ -1,0 +1,48 @@
+
+
+.choose{
+    margin-top: 20px;
+    span{
+        margin-left: 25px;
+    }
+}
+
+.container{
+    margin-bottom: 10px;
+    padding-left: 0px;
+    display: flex;
+    align-items: center; /* Alinha verticalmente os itens */
+
+    button{
+        height: 50px;
+        width: 40px;
+        border: 3px solid purple;
+        color: white;
+        background-color: purple;
+        font-size: 30px;
+    }
+
+    .minus{
+        border-top-left-radius: 15px;
+        border-bottom-left-radius: 15px;
+    }
+
+    .plus{
+        border-top-right-radius: 15px;
+        border-bottom-right-radius: 15px;
+    }
+
+    .content{
+        // padding: 16px 10px 7px 10px;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        width: 40px;
+        height: 50px;
+        
+    }
+    .message{
+        margin-left: 10px;
+        color: red;
+    }
+}

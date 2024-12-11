@@ -32,4 +32,15 @@ export class ContactComponent {
         alert("Message successfully registered!");
       });
   }
+
+  formatPhone(): void {
+    let phone = this.contact.phone.replace(/\D/g, ''); // Remove todos os caracteres que não são dígitos
+    if (phone.length > 2) {
+      phone = phone.substring(0, 2) + ' ' + phone.substring(2);
+    }
+    if (phone.length > 7) {
+      phone = phone.substring(0, 7) + '-' + phone.substring(7, 11);
+    }
+    this.contact.phone = phone;
+  }
 }

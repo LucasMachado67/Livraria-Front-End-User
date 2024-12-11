@@ -1,0 +1,10 @@
+
+<div class="choose">
+    <span>Quantity:</span>
+</div>
+<div class="container">
+    <button class="minus" (click)="minus()">-</button>
+    <span class="content">{{currentQuantity}}</span>
+    <button class="plus" (click)="plus()">+</button>
+    <span class="message" *ngIf="showMessage"><i class="fa-solid fa-circle-exclamation"></i> {{messageContent}}</span>
+</div>

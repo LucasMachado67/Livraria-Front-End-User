@@ -4,11 +4,12 @@ import { HttpClient, HttpClientModule } from '@angular/common/http';
 import { FormsModule } from '@angular/forms';
 import { Book } from '../../Model/Book';
 import { BookService } from '../../service/book.service';
-import { RouterLink, RouterLinkActive,RouterOutlet,RouterModule } from '@angular/router';
+import { RouterLink, RouterLinkActive,RouterModule } from '@angular/router';
 import { SearchService } from '../../service/search.service';
 import { FilterComponent } from '../filter/filter.component';
 import { Filter } from '../../Model/Filter';
 import { CategoryService } from '../../service/category.service';
+import { environment } from '../../../environment';
 
 @Component({
   selector: 'app-main-page',
@@ -20,7 +21,6 @@ import { CategoryService } from '../../service/category.service';
     RouterLink,
     RouterLinkActive,
     RouterModule,
-    RouterOutlet,
     FilterComponent
 ],
   templateUrl: './main-page.component.html',
@@ -34,12 +34,13 @@ export class MainPageComponent implements OnInit{
   books:Book[] = [];
   allBooks: any[] = [];
   filter: Filter = new Filter();
+  searchTerm: string = '';
+  readonly url = environment.url;
 
   constructor(
     private service:BookService,
     private http: HttpClient,
-    private searchService: SearchService,
-    private categoryService: CategoryService
+    private searchService: SearchService
   ){}
 
   selectBook(): void {
@@ -51,7 +52,7 @@ export class MainPageComponent implements OnInit{
       (error) => console.error('Error loading books', error)
     );
   }
-
+  //Function related to Filter
   applyFilter(filter: Filter) {
     this.books = this.allBooks.filter(book => {
       return (
@@ -62,21 +63,44 @@ export class MainPageComponent implements OnInit{
       );
     });
   }
+  //Functions related to Search
+  onSearch(event?: Event): void {
+    if (event) {
+      event.preventDefault();
+    }
+    if (this.searchTerm.length > 1) {
+      this.http.get<any[]>(`${this.url}/books/search?query=${this.searchTerm}`).subscribe(
+        (results) => {
+          this.searchService.updateResults(results);
+        },
+        (error) => {
+          console.error('Error fetching search results', error);
+          if (error.status === 200 && error.ok === false) {
+            alert('Error: The response format is not valid JSON.');
+          }
+        }
+      );
+    } else {
+      this.searchService.updateResults([]);
+    }
+  }
+
+  applySearch(searchTerm: any[]) {
+    return this.books = searchTerm;
+  }
 
   ngOnInit(): void {
     this.selectBook();
-
-    this.searchService.searchResults$.subscribe(
-      (results) => {
-        if (results.length > 0) {
-          this.books = results;
-        } else {
-          this.books = this.allBooks;
-        }
-        this.applyFilter(this.filter);
-      },
-      (error) => console.error('Error receiving search results', error)
-    );
+    this.searchService.searchResults$.subscribe((results) => {
+      if (results.length > 0) {
+        this.books = results;
+        this.applySearch(results);
+      } else {
+        this.books = [...this.allBooks]; 
+        this.applySearch(this.allBooks);
+        this.service.select();
+      }
+    });
   }
 }
 

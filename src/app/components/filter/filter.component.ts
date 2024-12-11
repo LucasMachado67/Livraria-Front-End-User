@@ -18,7 +18,7 @@ export class FilterComponent {
   filter: Filter = new Filter();
 
   @Output() filterApplied = new EventEmitter<Filter>();
-
+  
   applyFilters() {
     this.filterApplied.emit(this.filter);
   }

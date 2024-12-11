@@ -1,5 +1,15 @@
 <app-filter (filterApplied)="applyFilter($event)"></app-filter>
 <div class="container text-center">
+  <form class="d-flex w-100 justify-content-center" (submit)="onSearch($event)">
+    <input 
+      type="text" 
+      placeholder="Search books..." 
+      [(ngModel)]="searchTerm"
+      name="search"
+      [ngModelOptions]="{standalone: true}"
+      (input)="onSearch()" 
+      class="searchInput"/>
+  </form>
   <div class="row row-cols-3">
     <div class="col" *ngFor="let b of books">
       <img [src]="'data:image/jpeg;base64,' + b.image" alt="" class="card-img">
@@ -11,6 +21,8 @@
         routerLinkActive="active">
         ${{ b.price }}
       </a>
+      
     </div>
   </div>
+  
 </div>
