@@ -1,0 +1,70 @@
+
+.main-container {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin: 20px auto;
+    max-width: 1200px;
+    width: 100%;
+    margin-top: 50px;
+    
+    .container {
+        flex: 1; 
+        max-width: 50%;
+
+        .img {
+            img {
+                width: 327px;
+                height: 388px;
+                
+            }
+        }
+    }
+
+    .contact {
+        flex: 1; /* Atribui espaço proporcional */
+        max-width: 50%; /* Ajusta o espaço */
+        display: flex;
+        flex-direction: column;
+        border-left: 5px solid black !important;
+        
+
+        p {
+            font-size: 50px;
+            font-weight: bold;
+            margin-bottom: 15px;
+            margin-left: 40px;
+        }
+
+
+            .message {
+                display: flex;
+                flex-direction: column;
+                margin-left: 40px;
+                input {
+                    margin-bottom: 30px;
+                    padding: 10px;
+                    font-size: 1rem;
+                    border: none;
+                    border-bottom: 3px solid black;
+                    width: 100%;
+                    
+                }
+
+                .contact-us {
+                    padding: 10px;
+                    font-size: 1rem;
+                    background-color: purple;
+                    color: white;
+                    border-radius: 15px;
+                    cursor: pointer;
+
+                    &:hover {
+                        background-color: rgb(160, 63, 160);
+                        
+                    }
+                }
+            }
+        
+    }
+}

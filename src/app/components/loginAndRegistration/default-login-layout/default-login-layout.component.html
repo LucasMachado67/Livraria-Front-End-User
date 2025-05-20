@@ -1,0 +1,28 @@
+<main>
+    
+    <section class="form-section">
+        <img src="../../../../assets/dia-mundial-do-livro.png" alt="">
+        <h2>{{title}}</h2>
+        <ng-content></ng-content>
+        <div class="btn-wrapper">
+            <button 
+                class="btn-primary" 
+                (click)="submit()"
+                [disabled]="disablePrimaryBtn"
+            >{{primaryBtnText}}</button>
+                
+            <div class="divider">
+                <div></div>
+                <span>or</span>
+                <div></div>
+            </div>
+            <button class="btn-secondary" (click)="navigate()">{{secondaryBtnText}}</button>
+        </div>
+
+    </section>
+    <section class="main-section">
+        <h1>Let´s start reading!</h1>
+        <img src="../../../../assets/imagem-livro-roxo.jpeg" alt="">
+    </section>
+
+</main>

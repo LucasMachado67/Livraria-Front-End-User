@@ -1,0 +1,19 @@
+<app-filter (filterApplied)="applyFilter($event)"></app-filter>
+<div class="container text-center">
+  <app-search-bar (resultSearch)="searchByTitleOrAuthor($event)"></app-search-bar>
+  <div class="row row-cols-3">
+    <div class="col" *ngFor="let b of books">
+      <img [src]="'data:image/jpeg;base64,' + b.image" alt="" class="card-img">
+      <span class="card-title">{{ b.title }}</span>
+      <button
+        class="price-a" 
+        *ngIf="b.code"
+        (click)="viewBook(b.code)"
+        >
+        ${{ b.price }}
+      </button>
+      
+    </div>
+  </div>
+  
+</div>

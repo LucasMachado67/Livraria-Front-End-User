@@ -1,0 +1,30 @@
+<app-default-login-layout
+    title="Login into your account"
+    primaryBtnText="Sign In"
+    secondaryBtnText="Sign Up"
+    (submit)="submit()"
+    (navigate)="navigate()"
+    [disablePrimaryBtn]="!loginForm.valid"
+>
+    <form [formGroup]="loginForm">
+        <app-primary-input
+            formControlName="email"
+            inputName="email"
+            type="email"
+            label="email"
+            placeHolder="johndoe@email.com"
+        >            
+            <p><i class="fa-regular fa-envelope"></i></p>
+        </app-primary-input>
+        <app-primary-input
+            formControlName="password"
+            inputName="password"
+            type="password"
+            label="Your password"
+        >            
+            <p><i class="fa-solid fa-lock"></i></p>
+        </app-primary-input>
+        <span>Forgot Password?</span>
+    </form>
+
+</app-default-login-layout>

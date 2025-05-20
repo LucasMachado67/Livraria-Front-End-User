@@ -1,0 +1,34 @@
+<form class="filter-container">
+  <div class="scrollable-content">
+
+    <button class="categories">
+      Categories
+    </button>
+    <span class="spanFilter">Prices</span>
+    <select class="select" name="price" [(ngModel)]="filter.price">
+      <option [ngValue]="null">All Prices</option>
+      <option [ngValue]="{min: 0, max: 50}">$0 - $50</option>
+  <option [ngValue]="{min: 50, max: 100}">$50 - $100</option>
+  <option [ngValue]="{min: 100, max: 200}">$100 - $200</option>
+  <option [ngValue]="{min: 200, max: 500}">$200 - $500</option>
+  <option [ngValue]="{min: 500, max: 99999}">Above $500</option>
+    </select>
+  
+    <span class="spanFilter">Language</span>
+    <div class="Language">
+      <label><input type="checkbox" value="English" name="languageEnglish" (change)="onLanguageChange($event)"> English</label><br>
+      <label><input type="checkbox" value="Portuguese" name="languagePortuguese" (change)="onLanguageChange($event)"> Portuguese</label>
+    </div>
+
+    <span class="spanFilter">Book Cover</span>
+    <div class="bookCover">
+      <label><input type="checkbox" value="SoftCover" name="softCover" (change)="onBookCoverChange($event)"> Soft Cover</label><br>
+      <label><input type="checkbox" value="HardCover" name="hardCover" (change)="onBookCoverChange($event)"> Hard Cover</label>
+    </div>
+        
+  </div>
+    <div class="buttons">
+      <button class="apply" (click)="applyFilters()"><i class="fa-solid fa-filter"></i></button>
+      <button class="clear" (click)="clearFilters()"><i class="fa-solid fa-trash"></i></button>
+    </div>
+  </form>
