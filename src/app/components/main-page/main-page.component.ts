@@ -78,6 +78,7 @@ export class MainPageComponent implements OnInit {
   searchByTitleOrAuthor($event: Book[]) {
     if (this.books.length <= 0) {
       alert('No Data Found for the title');
+      return this.books;
     }
     this.books = $event;
     return this.books;

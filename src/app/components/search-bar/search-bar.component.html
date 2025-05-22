@@ -1,0 +1,11 @@
+
+<div class="container">
+    <div>
+        <input type="text" placeholder="Title..." class="titleInput input" [(ngModel)]="term">
+        <button class="search" (click)="searchByTitle(term)"><i class="fa-solid fa-magnifying-glass"></i></button>
+    </div>
+    <div>
+        <input type="text" placeholder="Author..." class="authorInput input" [(ngModel)]="authorTerm">
+        <button class="search" (click)="searchByAuthor(term)"><i class="fa-solid fa-magnifying-glass"></i></button>
+    </div>
+</div>

@@ -6,9 +6,8 @@ import { BookService } from '../../service/book.service';
 import { NgIf, NgFor } from '@angular/common';
 import { QuantityButtonComponent } from "../../components/quantity-button/quantity-button.component";
 import { BookDetailsDTO } from '../../Model/BookDetailsDTO';
-import { Category } from '../../Model/Category';
 import { Author } from '../../Model/Author';
-
+import { Category } from '../../Model/Category';
 
 @Component({
   selector: 'app-book-view',
