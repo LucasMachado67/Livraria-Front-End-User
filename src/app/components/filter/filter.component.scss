@@ -10,6 +10,40 @@
     flex-grow: 1;
     margin-bottom: 100px;
   }
+
+  .selectCategoryButton{
+        margin: 30px 0px 30px 0px;
+    }
+    
+    
+    .categoryPage {
+        position: fixed; 
+      top: 50%;
+      left: 50%;
+      transform: translate(-50%, -50%); 
+      width: 900px;
+      height: 600px;
+      background: rgb(50, 49, 49); 
+      z-index: 9999;
+      border: 2px solid purple;
+        .closeButton {
+            position: absolute;
+            margin: 5px;
+            right: 3px;
+            background: none;
+            border: none;
+            border-radius: 0;
+            font-size: 20px;
+            cursor: pointer;
+            color: red;
+            font-weight: bold;
+        }
+    
+        .closeButton:hover {
+            color: white;
+            background-color: red;
+        }
+    }
   .categories {
     margin-top: 10px;
     width: 200px;

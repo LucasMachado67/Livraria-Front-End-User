@@ -1,9 +1,23 @@
 <form class="filter-container">
   <div class="scrollable-content">
-
-    <button class="categories">
+    <button
+      (click)="categoryPage = false"
+      class="btn btn-primary selectCategoryButton"
+    >
       Categories
     </button>
+    <div *ngIf="!categoryPage" class="categoryPage">
+      <button
+        (click)="categoryPage = true"
+        class="btn btn-primary selectCategoryButton closeButton"
+      >
+        X
+      </button>
+      <app-categories [selected]="filter.category"
+        (choosedCategories)="updateSelectedCategories($event)"
+        >
+    </app-categories>
+    </div>
     <span class="spanFilter">Prices</span>
     <select class="select" name="price" [(ngModel)]="filter.price">
       <option [ngValue]="null">All Prices</option>

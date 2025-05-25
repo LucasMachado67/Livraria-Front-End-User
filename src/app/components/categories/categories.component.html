@@ -1,1 +1,13 @@
-<p>categories works!</p>
+<div class="container">
+  <h2>Categories</h2>
+  <div class="categories">
+    <div class="category" *ngFor="let c of categories">
+        <label for="" class="labelCategory">
+            <p>
+                <input type="checkbox" [value]="c.category" (change)="onCategoryChange($event, c)" [checked]="isCategorySelected(c)">
+                {{c.category}}
+            </p>
+        </label>
+    </div>
+  </div>
+</div>
