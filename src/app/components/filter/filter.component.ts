@@ -2,21 +2,28 @@ import { Component, EventEmitter, Output } from '@angular/core';
 import { FormsModule } from '@angular/forms';
 import { CommonModule } from '@angular/common';
 import { Filter } from '../../Model/Filter';
+import { CategoriesComponent } from "../categories/categories.component";
+import { Category } from '../../Model/Category';
+import { Book } from '../../Model/Book';
 
 @Component({
   selector: 'app-filter',
   standalone: true,
   imports: [
     FormsModule,
-    CommonModule
-  ],
+    CommonModule,
+    CategoriesComponent
+],
   templateUrl: './filter.component.html',
   styleUrl: './filter.component.scss'
 })
 export class FilterComponent{
 
   filter: Filter = new Filter();
-  
+  categoryPage: Boolean = true;
+  categoriesSelectedToShow: Category[] = [];
+  book = new Book();
+  books: Book[] = [];
 
   @Output() filterApplied = new EventEmitter<Filter>();
   
@@ -54,5 +61,14 @@ export class FilterComponent{
     } else{
       this.filter.category = this.filter.category.filter(cate => cate !== value);
     }
+  }
+
+  //Categorias
+  updateSelectedCategories(categories: Category[]) {
+    this.categoriesSelectedToShow = categories;
+    this.filter.category = categories;
+    console.log(
+      'Categorias atualizadas: ' + JSON.stringify(categories, null, 2)
+    );
   }
 }

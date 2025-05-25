@@ -1,0 +1,35 @@
+.container {
+    height: 630px;
+    width: 100%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    overflow-y: auto;
+    flex-direction: column; 
+
+    h2{
+        color: rgb(180, 71, 180);
+        display: block;
+        margin-bottom: 30px;
+    }
+
+    .categories {
+        display: grid;
+        grid-template-columns: repeat(4, 1fr); // 7 colunas
+        gap: 10px; 
+    }
+
+    .labelCategory {
+        display: flex;
+        align-items: center;
+        white-space: nowrap; // Garante que o texto não quebre
+        p {
+            color: rgb(180, 71, 180);
+            margin-left: 3px;
+            input{
+                height: 20px;
+                width: 20px;
+            }
+        }
+    }
+}

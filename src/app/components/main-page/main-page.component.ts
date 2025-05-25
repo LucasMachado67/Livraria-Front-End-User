@@ -9,6 +9,7 @@ import { FilterComponent } from '../filter/filter.component';
 import { Filter } from '../../Model/Filter';
 import { environment } from '../../../environment';
 import { SearchBarComponent } from '../search-bar/search-bar.component';
+import { Category } from '../../Model/Category';
 
 @Component({
   selector: 'app-main-page',
@@ -71,7 +72,9 @@ export class MainPageComponent implements OnInit {
             (cover) => cover.toLowerCase() === book.bookCover.toLowerCase()
           )) &&
         (filter.category.length === 0 ||
-          filter.category.some((cat) => book.categories.includes(cat)))
+          filter.category.some((cat) =>
+          book.categories.some((bCat: Category) => bCat.id === cat.id)
+        ))
       );
     });
   }

@@ -1,3 +1,5 @@
+import { Category } from "./Category";
+
 export class Book{
 
     code:number = 0;
@@ -11,7 +13,7 @@ export class Book{
     image: string | ArrayBuffer | null = null;
     quantity: number = 0;
     description: string = "";
-    categories: string[];
+    categories: Category[];
 
     constructor(){
         this.categories = [];
