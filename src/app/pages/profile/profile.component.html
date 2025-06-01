@@ -1,4 +1,28 @@
 
 <app-header></app-header>
 
-<p>{{user.email}}</p>
+<div class="container mt-5">
+  <div class="card shadow p-4">
+    <h2 class="card-title mb-4 text-center">Perfil do Usuário</h2>
+
+    <ul class="list-group list-group-flush">
+      <li class="list-group-item">
+        <strong>Email:</strong> {{ email }}
+      </li>
+      <li class="list-group-item">
+        <strong>Nome:</strong> {{ name }}
+      </li>
+      <li class="list-group-item">
+        <strong>Telefone:</strong> {{ phone }}
+      </li>
+      <li class="list-group-item">
+        <strong>Gênero:</strong> {{ gender }}
+      </li>
+    </ul>
+
+    <div class="actions" >
+        <button (click)="logout()">Logout</button>
+        <button>Alterar Senha</button>
+    </div>
+  </div>
+</div>

@@ -1,0 +1,27 @@
+.card {
+  max-width: 500px;
+  margin: 0 auto;
+  border-radius: 1rem;
+}
+
+.actions{
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    margin-top: 20px;
+    gap: 10px;
+
+    button{
+        width: 200px;
+        height: 40px;
+        border-radius: 10px;
+        border: 3px solid purple;
+        background-color: rgb(255, 255, 255);
+        font-weight: bold;
+        font-size: larger;
+    }
+    button:hover{
+        background-color: rgb(163, 45, 163);
+        transition: 1s;
+    }
+}
