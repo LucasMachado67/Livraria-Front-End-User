@@ -8,9 +8,7 @@ import { environment } from '../../environment';
   providedIn: 'root'
 })
 export class LoginService {
-  
-  // private url: string = "http://localhost:8080"
-  // private url: string = "https://livrariaback-end-production.up.railway.app"
+
   readonly url = environment.url;
   constructor(private httpClient: HttpClient) { }
 
@@ -18,18 +16,22 @@ export class LoginService {
     return this.httpClient.post<LoginResponse>(this.url + "/auth/login", { email, password}).pipe(
       tap((value) =>{
         sessionStorage.setItem("auth-token", value.token)
-        sessionStorage.setItem("username", value.name)
+        sessionStorage.setItem("username", value.email)
       })
     )
   }
 
-  signup(name: string ,email: string , password: string){
-    return this.httpClient.post<LoginResponse>(this.url +"/auth/register", { name, email, password}).pipe(
+  signup(name: string, email: string, password: string, phone: string, gender: string){
+    return this.httpClient.post<LoginResponse>(this.url +"/auth/signup", { name, email, password, phone, gender}).pipe(
       tap((value) =>{
         sessionStorage.setItem("auth-token", value.token)
-        sessionStorage.setItem("username", value.name)
+        sessionStorage.setItem("username", value.email)
       })
     )
+  }
+
+  getToken():string | null{
+    return localStorage.getItem('auth-token');
   }
 
   logout(){

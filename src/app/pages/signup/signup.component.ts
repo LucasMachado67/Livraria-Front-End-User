@@ -1,6 +1,6 @@
 import { Component } from '@angular/core';
 import { DefaultLoginLayoutComponent } from '../../components/loginAndRegistration/default-login-layout/default-login-layout.component';
-import { FormControl, FormGroup, FormRecord, ReactiveFormsModule, Validators } from '@angular/forms';
+import { FormControl, FormGroup, ReactiveFormsModule, Validators } from '@angular/forms';
 import { PrimaryInputComponent } from '../../components/loginAndRegistration/primary-input/primary-input.component';
 import { Router } from '@angular/router';
 import { LoginService } from '../../service/login.service';
@@ -11,6 +11,8 @@ interface SignupForm {
   email: FormControl,
   password: FormControl,
   passwordConfirm: FormControl
+  phone: FormControl
+  gender: FormControl
 }
 
 @Component({
@@ -32,18 +34,31 @@ export class SignUpComponent {
       private toastService: ToastrService
     ){
       this.signupForm = new FormGroup({
-        name: new FormControl('',[Validators.required, Validators.minLength(3)]),
-        email: new FormControl('',[Validators.required, Validators.email]),
-        password: new FormControl('',[Validators.required, Validators.minLength(6)]),
-        passwordConfirm: new FormControl('',[Validators.required, Validators.minLength(6)])
+        name: new FormControl('',[Validators.required]),
+        email: new FormControl('',[Validators.required]),
+        password: new FormControl('',[Validators.required]),
+        passwordConfirm: new FormControl('',[Validators.required]),
+        phone: new FormControl('',[Validators.required]),
+        gender: new FormControl('',[Validators.required])
       })
     }
 
     submit(){
-      this.loginService.signup(this.signupForm.value.name, this.signupForm.value.email, this.signupForm.value.password).subscribe({
-        next: () => this.toastService.success("Sign In successfuly made!"),
-        error: () => this.toastService.error("Something went wrong, Try again later")
-      })
+      this.loginService.signup(
+                this.signupForm.value.name,
+                this.signupForm.value.email,
+                this.signupForm.value.password,
+                this.signupForm.value.phone,
+                this.signupForm.value.gender).subscribe({
+                    next: () => {
+                      this.toastService.success("Sign In successfully made!");
+                      this.navigate();
+                    },
+                    error: (err) => {
+                      this.toastService.error("Error during sign up!");
+                      console.error(err);
+                    }
+                    });
     }
     navigate(){
       this.router.navigate(["login"])
