@@ -40,7 +40,6 @@
     .nav-link{
 
         color: black;
-        
     }
 
 }
@@ -83,6 +82,9 @@
   .nav-item {
     flex: 1; /* Faz as nav-items ocuparem espaço igual */
     text-align: center; /* Centraliza o texto */
+    .icon{
+        font-size: 20px;
+    }   
   }
 
 

@@ -1,10 +1,9 @@
 import { CommonModule } from '@angular/common';
-import { Component, EventEmitter, Output } from '@angular/core';
+import { Component, OnInit} from '@angular/core';
 import { Router, RouterLink, RouterLinkActive, RouterModule } from '@angular/router';
 import { FormsModule } from '@angular/forms';
-import { HttpClient } from '@angular/common/http';
-import { SearchService } from '../../service/search.service';
 import { environment } from '../../../environment';
+import { LoginService } from '../../service/login.service';
 
 @Component({
   selector: 'app-header',
@@ -13,15 +12,24 @@ import { environment } from '../../../environment';
   templateUrl: './header.component.html',
   styleUrl: './header.component.scss'
 })
-export class HeaderComponent {
+export class HeaderComponent implements OnInit{
 
-  userName: string | null = null;
+
+  username: string | null = "";
   hideUsersAndBooks: boolean = true;
-  searchTerm: string = '';
-  readonly url = environment.url;
-  constructor(private http: HttpClient,
-              private searchService: SearchService,
-              private router: Router) {}
+
+  constructor(private router: Router,private loginService: LoginService) {}
+
+  isLoggedIn(): boolean {
+    return  !!this.loginService.getToken();
+  }
+
+  updateUsername(){
+    if (typeof sessionStorage !== 'undefined') {
+      return this.username = sessionStorage.getItem('username');
+    }
+    return null;
+  }
 
   //Navigation between pages
   navigateToPage(page: string) {
@@ -31,6 +39,8 @@ export class HeaderComponent {
       this.router.navigate(['/user/favorites']);
     }
   }
-
+  ngOnInit(){
+    this.updateUsername();
+  }
 
 }

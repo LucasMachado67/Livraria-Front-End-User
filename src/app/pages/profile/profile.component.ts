@@ -1,9 +1,8 @@
 import { CommonModule } from '@angular/common';
-import { Component, Input } from '@angular/core';
+import { Component, OnInit } from '@angular/core';
 import { HeaderComponent } from "../../components/header/header.component";
-import { User } from '../../Model/User';
-import { ActivatedRoute } from '@angular/router';
-import { UserService } from '../../service/user.service';
+import { ActivatedRoute, Router } from '@angular/router';
+import { LoginService } from '../../service/login.service';
 
 @Component({
   selector: 'app-profile',
@@ -15,24 +14,29 @@ import { UserService } from '../../service/user.service';
   templateUrl: './profile.component.html',
   styleUrl: './profile.component.scss'
 })
-export class ProfileComponent {
+export class ProfileComponent implements OnInit{
 
-  user = new User();
-  @Input() Users!: User;
-  book: any;
+  name:string | null = "";
+  email:string | null = "";
+  phone:string | null = "";
+  gender:string | null = "";
+  constructor(private route: ActivatedRoute, private loginService: LoginService, private router:Router) {}
+  
 
-  constructor(private route: ActivatedRoute, private service: UserService) {}
+  updateUserInformation(){
+    const userData = this.loginService.getUserData();
+    this.name = userData.name;
+    this.email = userData.email;
+    this.phone = userData.phone;
+    this.gender = userData.gender;
+  }
+
+  logout() {
+    this.loginService.logout();
+    this.router.navigate(["/home"])
+  }
 
   ngOnInit(): void {
-    const userId = Number(this.route.snapshot.paramMap.get('code'));
-
-    this.service.getUserById(userId).subscribe(
-      (data) => {
-        this.user = data;
-      },
-      (error) => {
-        console.error('Error while fetching user:', error);
-      }
-    );
+    this.updateUserInformation();  
   }
 }
