@@ -6,6 +6,7 @@ import { SignUpComponent } from './pages/signup/signup.component';
 import { ProfileComponent } from './pages/profile/profile.component';
 import { ContactComponent } from './pages/contact/contact.component';
 import { authGuard } from './utils/AuthGuard';
+import { AlterPasswordComponent } from './pages/alter-password/alter-password.component';
 
 
 export const routes: Routes = [
@@ -30,5 +31,8 @@ export const routes: Routes = [
     ,
     {
         path: "profile", component: ProfileComponent, canActivate: [authGuard] 
+    },
+    {
+        path: "profile/password", component: AlterPasswordComponent, canActivate: [authGuard]
     }
 ];

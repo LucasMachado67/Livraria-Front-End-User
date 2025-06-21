@@ -16,6 +16,7 @@ import { LoginService } from '../../service/login.service';
 })
 export class ProfileComponent implements OnInit{
 
+
   name:string | null = "";
   email:string | null = "";
   phone:string | null = "";
@@ -33,7 +34,10 @@ export class ProfileComponent implements OnInit{
 
   logout() {
     this.loginService.logout();
-    this.router.navigate(["/home"])
+  }
+
+  navigateToChangePassword() {
+    this.router.navigate(['/profile/password'])
   }
 
   ngOnInit(): void {
