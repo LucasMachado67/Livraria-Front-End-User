@@ -1,15 +1,16 @@
 import { HttpClient } from '@angular/common/http';
 import { EventEmitter, Injectable } from '@angular/core';
 import { LoginResponse } from '../types/login-response';
-import { tap } from 'rxjs';
+import { Observable, tap } from 'rxjs';
 import { environment } from '../../environment';
+import { Router } from '@angular/router';
 
 @Injectable({
   providedIn: 'root',
 })
 export class LoginService {
   readonly url = environment.url;
-  constructor(private httpClient: HttpClient) {}
+  constructor(private httpClient: HttpClient, private router: Router) {}
 
   login(email: string, password: string) {
     return this.httpClient
@@ -17,23 +18,16 @@ export class LoginService {
       .pipe(
         tap((value) => {
           if (value.token) sessionStorage.setItem('auth-token', value.token);
-          if (value.email)sessionStorage.setItem('email', value.email);
-          if (value.name)sessionStorage.setItem('username', value.name);
-          if (value.phone)sessionStorage.setItem('phone', value.phone);
-          if (value.gender)sessionStorage.setItem('gender', value.gender)
+          if (value.email) sessionStorage.setItem('email', value.email);
+          if (value.name) sessionStorage.setItem('username', value.name);
+          if (value.phone) sessionStorage.setItem('phone', value.phone);
+          if (value.gender) sessionStorage.setItem('gender', value.gender);
         })
       );
   }
 
-  signup(
-    name: string,
-    email: string,
-    password: string,
-    phone: string,
-    gender: string
-  ) {
-    return this.httpClient
-      .post<LoginResponse>(this.url + '/auth/signup', {
+  signup(name: string, email: string, password: string, phone: string, gender: string) {
+    return this.httpClient.post<LoginResponse>(this.url + '/auth/signup', {
         name,
         email,
         password,
@@ -56,12 +50,12 @@ export class LoginService {
   }
 
   getUserData(): any {
-    if(typeof sessionStorage !== 'undefined'){
+    if (typeof sessionStorage !== 'undefined') {
       return {
         email: sessionStorage.getItem('email'),
-        name: sessionStorage.getItem('username'), 
+        name: sessionStorage.getItem('username'),
         phone: sessionStorage.getItem('phone'),
-        gender: sessionStorage.getItem('gender')
+        gender: sessionStorage.getItem('gender'),
       };
     }
     return null;
@@ -70,13 +64,11 @@ export class LoginService {
   logout() {
     sessionStorage.removeItem('auth-token');
     sessionStorage.removeItem('username');
+    this.router.navigate(['/login']);
   }
 
-  // authChanged = new EventEmitter<any>();
-
-  // setUser(token: string, email: string) {
-  //   sessionStorage.setItem('auth-token', token);
-  //   sessionStorage.setItem('username', email);
-  //   this.authChanged.emit(email);
-  // }
+  changePassword(password: string, email: string): Observable<any> {
+    const body = { password, email };
+    return this.httpClient.put<any>(this.url + '/auth/password', body);
+  }
 }
