@@ -30,6 +30,8 @@ export class ProfileComponent implements OnInit{
     this.email = userData.email;
     this.phone = userData.phone;
     this.gender = userData.gender;
+    console.log("Userdata" + userData);
+    console.log("Email: " + this.email)
   }
 
   logout() {

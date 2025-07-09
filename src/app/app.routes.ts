@@ -7,6 +7,7 @@ import { ProfileComponent } from './pages/profile/profile.component';
 import { ContactComponent } from './pages/contact/contact.component';
 import { authGuard } from './utils/AuthGuard';
 import { AlterPasswordComponent } from './pages/alter-password/alter-password.component';
+import { WishListComponent } from './pages/wish-list/wish-list.component';
 
 
 export const routes: Routes = [
@@ -34,5 +35,8 @@ export const routes: Routes = [
     },
     {
         path: "profile/password", component: AlterPasswordComponent, canActivate: [authGuard]
+    },
+    {
+        path: "wishlist", component: WishListComponent, canActivate: [authGuard]
     }
 ];
