@@ -3,7 +3,6 @@ import { FormControl, FormGroup, ReactiveFormsModule, Validators } from '@angula
 import { Router } from '@angular/router';
 import { LoginService } from '../../service/login.service';
 import { ToastrService } from 'ngx-toastr';
-import { timeout } from 'rxjs';
 
 interface changePassword{
   oldPassword:FormControl

@@ -1,5 +1,5 @@
 import { HttpClient } from '@angular/common/http';
-import { EventEmitter, Injectable } from '@angular/core';
+import { Injectable } from '@angular/core';
 import { LoginResponse } from '../types/login-response';
 import { Observable, tap } from 'rxjs';
 import { environment } from '../../environment';
@@ -52,7 +52,7 @@ export class LoginService {
   getUserData(): any {
     if (typeof sessionStorage !== 'undefined') {
       return {
-        email: sessionStorage.getItem('email'),
+        email: sessionStorage.getItem("email"),
         name: sessionStorage.getItem('username'),
         phone: sessionStorage.getItem('phone'),
         gender: sessionStorage.getItem('gender'),
@@ -62,13 +62,16 @@ export class LoginService {
   }
 
   logout() {
-    sessionStorage.removeItem('auth-token');
-    sessionStorage.removeItem('username');
+    sessionStorage.clear();
     this.router.navigate(['/login']);
   }
 
   changePassword(password: string, email: string): Observable<any> {
     const body = { password, email };
     return this.httpClient.put<any>(this.url + '/auth/password', body);
+  }
+
+  getUserFromApi(): Observable<any> {
+    return this.httpClient.get<any>(this.url + '/auth/me');
   }
 }

@@ -8,6 +8,9 @@ import { QuantityButtonComponent } from "../../components/quantity-button/quanti
 import { BookDetailsDTO } from '../../Model/BookDetailsDTO';
 import { Author } from '../../Model/Author';
 import { Category } from '../../Model/Category';
+import { WishListService } from '../../service/wish-list.service';
+import { ToastrService } from 'ngx-toastr';
+import { NgClass } from '@angular/common';
 
 @Component({
   selector: 'app-book-view',
@@ -17,23 +20,31 @@ import { Category } from '../../Model/Category';
     RouterModule,
     NgIf,
     NgFor,
-    QuantityButtonComponent
+    QuantityButtonComponent,
+    NgClass
 ],
   templateUrl: './book-view.component.html',
   styleUrl: './book-view.component.scss'
 })
 export class BookViewComponent implements OnInit {
+
   @Input() Books!: Book;
   book: any;
-  
   categories: Category[] = [];
   authors: Author[] = [];
-  
+  wishList: Book[] = [];
   totalPrice: number = 0;
-  constructor(private route: ActivatedRoute, private service:BookService) {}
+  inWishList: boolean = false;
+  loading: boolean = false;
+  error: string | null = null;
+  constructor(
+    private route: ActivatedRoute,
+    private service:BookService,
+    private wishListService:WishListService, private toast:ToastrService) {}
   
   updateTotalPrice(quantity: number): void {
-    const total = this.book.price * quantity;
+    const total = this.book.price *
+     quantity;
     this.totalPrice = parseFloat(total.toFixed(2));
   }
 
@@ -81,11 +92,63 @@ export class BookViewComponent implements OnInit {
     );
   }
 
+  addToWishList() {
+    if (!this.book?.code) {
+      this.toast.error("Book code not found")
+    }
+    this.wishListService.addToWishList(this.book.code).subscribe({
+      next: () => {
+        this.toast.success("Book added to wish list");
+        this.inWishList = true;
+      },
+      error: () => {
+        this.toast.error("Could not add to wish list");
+      }
+    });
+    
+  }
+
+  removeFromWishList(code: number): void{
+    this.wishListService.removeFromWishList(code).subscribe({
+      next: () => {
+        this.wishList = this.wishList.filter(book => book.code !== code);
+        this.toast.info("Removed from wishList");
+        this.inWishList = false;
+      },
+      error: () => {
+        this.toast.error("Error while trying to remove");
+      }
+    });
+  }
+
+  isInWishList(): void {
+    this.loading = true;
+    this.wishListService.getWishList().subscribe({
+      next: (books) => {
+        this.wishList = books;
+
+        this.wishList.forEach(book => {
+          if(book.code == this.book.code){
+            this.inWishList = true;
+          }
+        });
+
+        this.loading = false;
+      },
+      error: (err) =>{
+        console.log("Error while trying to fetch favored book")
+        this.loading = false;
+      }
+    }); 
+  }
+  
   ngOnInit(): void {
     this.getCategories();
     this.loadBook();
-    
-    window.scrollTo(0, 0);
+    this.isInWishList();
+    if (typeof window !== 'undefined') {
+      window.scrollTo(0, 0);
+    }
     
   }
 

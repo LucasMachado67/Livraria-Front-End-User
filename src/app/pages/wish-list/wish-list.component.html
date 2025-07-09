@@ -1,0 +1,29 @@
+<app-header></app-header>
+
+<div class="container">
+  <div *ngIf="error" class="error">{{ error }}</div>
+  <div *ngIf="!loading && wishList.length === 0">No book added :(</div>
+
+  <div class="card-list" *ngFor="let book of wishList">
+
+    <div class="card-img">
+      <img class="img-thumbnail" [src]="'data:image/jpeg;base64,' + book?.image"alt="">
+    </div>
+
+    <div class="card-content">
+      <span><strong>Title:</strong> {{book.title}}</span>
+      <span> <strong>Year:</strong> {{book.year}}</span>
+
+      <div class="actions">
+
+        <button class="details-button" (click)="navigateToBookPage(book.code)">See Details</button>
+        <button class="cart-button" (click)="addToCart(book.code)">Add to cart</button>
+        <button class="remove-button" (click)="removeFromWishList(book.code)">Remove</button>
+
+      </div>
+    </div>
+  </div>
+</div>
+
+
+

@@ -15,9 +15,8 @@
       
         <div class="information">
             <div class="favorite">
-                <a class="nav-link active" aria-current="page" href="#">
-                    <i class="fa-solid fa-heart fa-2xl"></i>
-                </a>
+                <button class="wish-button" [ngClass]="{'in-wishlist': inWishList}" *ngIf="!inWishList" (click)="addToWishList()"><i class="fa-solid fa-heart fa-2xl"></i></button>
+                <button class="wish-button" [ngClass]="{'in-wishlist': inWishList}" *ngIf="inWishList" (click)="removeFromWishList(book.code)"><i class="fa-solid fa-heart fa-2xl"></i></button>
             </div>
           <span class="text-start title">{{ book?.title }}</span>
           <span class="text-start car">Information</span>

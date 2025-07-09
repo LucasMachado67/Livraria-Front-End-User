@@ -28,12 +28,26 @@
 
     .pay{
         border-left: 3px solid purple;
-        .favorite{
-            float: right;
-        }
+        
         
         .information{
             margin-top: 30px ;
+
+            .favorite{
+                float: right;
+
+                .wish-button{
+                    
+                    color: black;
+                    border: none;
+                    background: none;
+
+                    &.in-wishlist {
+                        color: red;
+                    }
+                }
+                
+            }
             .text-start{
                 display: block;
             }
