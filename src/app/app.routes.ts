@@ -8,6 +8,7 @@ import { ContactComponent } from './pages/contact/contact.component';
 import { authGuard } from './utils/AuthGuard';
 import { AlterPasswordComponent } from './pages/alter-password/alter-password.component';
 import { WishListComponent } from './pages/wish-list/wish-list.component';
+import { CartComponent } from './pages/cart/cart.component';
 
 
 export const routes: Routes = [
@@ -38,5 +39,8 @@ export const routes: Routes = [
     },
     {
         path: "wishlist", component: WishListComponent, canActivate: [authGuard]
+    },
+    {
+        path: "cart", component: CartComponent, canActivate: [authGuard]
     }
 ];

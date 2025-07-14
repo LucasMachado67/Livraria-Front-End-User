@@ -5,6 +5,8 @@ import { UserService } from '../../service/user.service';
 import { CommonModule } from '@angular/common';
 import { HeaderComponent } from "../../components/header/header.component";
 import { Router } from '@angular/router';
+import { ToastrService } from 'ngx-toastr';
+import { CartService } from '../../service/cart.service';
 
 @Component({
   selector: 'app-wish-list',
@@ -19,8 +21,11 @@ export class WishListComponent implements OnInit{
   book = new Book();
   loading: boolean = false;
   error: string | null = null;
-  
-  constructor(private wishlistService:WishListService, private userService:UserService, private router:Router){}
+  quantitySelected: number = 1;
+  constructor(private wishlistService:WishListService,
+    private router:Router,
+    private toast:ToastrService,
+    private cartService:CartService){}
 
   loadWishList(): void{
     this.loading = true;
@@ -47,8 +52,19 @@ export class WishListComponent implements OnInit{
     }
   }
 
-  addToCart(code: number){
-
+  addToCart(bookCode: number): void {
+    if (!bookCode) {
+      this.toast.error("Book code not found")
+    }
+    console.log(this.quantitySelected)
+    this.cartService.addToCart(bookCode, this.quantitySelected).subscribe({
+      next: () => {
+        this.toast.success("Book added to cart");
+      },
+      error: () => {
+        this.toast.error("Could not add to cart");
+      }
+    });
   }
 
   removeFromWishList(code: number): void{

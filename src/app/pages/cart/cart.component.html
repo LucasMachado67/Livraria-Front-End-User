@@ -1,0 +1,30 @@
+<app-header></app-header>
+
+<div class="container">
+  <div *ngIf="error" class="error">{{ error }}</div>
+  <div *ngIf="!loading && cart.length === 0" class="message">No book added</div>
+
+  <div class="card-list" *ngFor="let b of cart">
+
+    <div class="card-img">
+      <img class="img-thumbnail" [src]="'data:image/jpeg;base64,' + b.book.image"alt="">
+    </div>
+
+    <div class="card-content">
+      <span><strong>Title:</strong> {{b.book.title}}</span>
+      <span> <strong>Year:</strong> {{b.book.year}}</span>
+      <span> <strong>Quantity Available:</strong> {{b.book.quantity}}</span>
+      <span> <strong>Quantity Selected:</strong> {{ b.quantitySelected }}</span>
+      <span class="price"><strong>Price: </strong>{{b.book.price * b.quantitySelected | number:'1.2-2'}} R$</span>
+
+      <div class="actions">
+        <button class="details-button" (click)="navigateToBookPage(b.book.code)">See Details</button>
+        <button class="remove-button" (click)="removeFromCart(b.book.code)">Remove</button>
+      </div>
+    </div>
+  </div>
+  <app-cart-total-price  [totalPrice]="getTotalPrice()"></app-cart-total-price>
+</div>
+
+
+
