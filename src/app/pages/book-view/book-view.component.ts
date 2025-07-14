@@ -11,6 +11,8 @@ import { Category } from '../../Model/Category';
 import { WishListService } from '../../service/wish-list.service';
 import { ToastrService } from 'ngx-toastr';
 import { NgClass } from '@angular/common';
+import { CartService } from '../../service/cart.service';
+import { Cart } from '../../Model/Cart';
 
 @Component({
   selector: 'app-book-view',
@@ -33,19 +35,24 @@ export class BookViewComponent implements OnInit {
   categories: Category[] = [];
   authors: Author[] = [];
   wishList: Book[] = [];
+  cart: Cart[] = [];
   totalPrice: number = 0;
   inWishList: boolean = false;
+  inCart: boolean = false;
   loading: boolean = false;
   error: string | null = null;
+  quantitySelected: number = 1;
   constructor(
     private route: ActivatedRoute,
     private service:BookService,
-    private wishListService:WishListService, private toast:ToastrService) {}
+    private wishListService:WishListService,
+    private toast:ToastrService,
+    private cartService:CartService) {}
   
   updateTotalPrice(quantity: number): void {
-    const total = this.book.price *
-     quantity;
+    const total = this.book.price * quantity;
     this.totalPrice = parseFloat(total.toFixed(2));
+    this.quantitySelected = quantity;
   }
 
   getCategories(): void {
@@ -105,7 +112,6 @@ export class BookViewComponent implements OnInit {
         this.toast.error("Could not add to wish list");
       }
     });
-    
   }
 
   removeFromWishList(code: number): void{
@@ -141,11 +147,60 @@ export class BookViewComponent implements OnInit {
       }
     }); 
   }
+
+  addToCart(): void {
+    if (!this.book?.code) {
+      this.toast.error("Book code not found")
+    }
+    console.log(this.quantitySelected)
+    this.cartService.addToCart(this.book.code, this.quantitySelected).subscribe({
+      next: () => {
+        this.toast.success("Book added to cart");
+        this.inCart = true;
+      },
+      error: () => {
+        this.toast.error("Could not add to cart");
+      }
+    });
+  }
+
+  removeFromCart(code: number): void{
+    this.cartService.removeFromCart(code).subscribe({
+      next: () => {
+        this.cart = this.cart.filter(item => item.book.code !== code);
+        this.toast.info("Removed from cart");
+        this.inCart = false;
+      },
+      error: () => {
+        this.toast.error("Error while trying to remove");
+      }
+    });
+  }
+
+  isInCart(): void {
+    this.loading = true;
+    this.cartService.getCart().subscribe({
+      next: (books) => {
+        this.cart.forEach(cart => {
+          if(cart.book.code == this.book.code){
+            this.inCart = true;
+          }
+        });
+
+        this.loading = false;
+      },
+      error: (err) =>{
+        console.log("Error while trying to fetch in cart books")
+        this.loading = false;
+      }
+    }); 
+  }
   
   ngOnInit(): void {
     this.getCategories();
     this.loadBook();
     this.isInWishList();
+    this.isInCart();
     if (typeof window !== 'undefined') {
       window.scrollTo(0, 0);
     }

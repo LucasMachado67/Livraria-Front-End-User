@@ -43,11 +43,15 @@
         <div class="payment">
           <app-quantity-button
             (quantityChange)="updateTotalPrice($event)"
+
           ></app-quantity-button>
           <span class="text-start price">Total: ${{ this.totalPrice }}</span>
           <button class="button buy">Buy</button>
-          <button class="button cart">
+          <button class="button cart" [ngClass]="{'in-cart': inCart}" *ngIf="!inCart" (click)="addToCart()">
             <i class="fa-solid fa-cart-shopping"></i>
+          </button>
+          <button class="button cart" [ngClass]="{'in-cart': inCart}" *ngIf="inCart" (click)="removeFromCart(book.code)">
+            <i class="fa-solid fa-trash"></i>
           </button>
         </div>
       </div>
